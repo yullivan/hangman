@@ -72,9 +72,30 @@ public class Utils {
     }
 
     // 사용자 입력을 받는 메소드
-    static char getGuess() {
+    static private String getInput() {
         System.out.print("글자를 추측하세요: ");
-        return scanner.nextLine().toUpperCase().charAt(0);
+        String input = scanner.nextLine();
+        if (input.length() != 1) {
+            throw new IllegalArgumentException("[ERROR] 알파벳 한 자만 입력해야 합니다.");
+        }
+
+        char letter = input.charAt(0);
+        if (!Character.isAlphabetic(letter)) {
+            throw new IllegalArgumentException("[ERROR] 알파벳이 아닙니다. 알파벳을 입력해 주세요.");
+        }
+        return String.valueOf(Character.toUpperCase(letter));
+    }
+
+    static String getGuess() {
+        String guess = "";
+        while (guess.isEmpty()) {
+            try {
+                guess = getInput();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return guess;
     }
 
     static String getHangmanPic(int wrongGuesses) {
