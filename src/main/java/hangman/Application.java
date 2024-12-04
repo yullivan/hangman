@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Application {
 
+    static final String MASK = "_";
+
     public static void main(String[] args) {
         // 게임 준비
         String answerWord = Utils.getRandomWord();
@@ -18,7 +20,7 @@ public class Application {
             List<Integer> indexes = locateUserGuess(answerWord, userGuess);
             maskedWord = replaceWithAlphabet(maskedWord, indexes, userGuess);
 
-            if (!maskedWord.contains("_")) {
+            if (!maskedWord.contains(MASK)) {
                 break;
             }
         }
@@ -27,7 +29,7 @@ public class Application {
     static List<String> generateMaskedWord(String answerWord) {
         ArrayList<String> list = new ArrayList<>();
         for (int i = 0; i < answerWord.length(); i++) {
-            list.add("_");
+            list.add(MASK);
         }
         return list;
     }
