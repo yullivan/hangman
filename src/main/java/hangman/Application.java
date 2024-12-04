@@ -6,6 +6,7 @@ import java.util.List;
 public class Application {
 
     static final String MASK = "_";
+    static final int MAX_WRONG_COUNT = 6;
 
     public static void main(String[] args) {
         // 게임 준비
@@ -13,14 +14,22 @@ public class Application {
         System.out.println(answerWord);
         List<String> maskedWord = generateMaskedWord(answerWord);
 
+        int wrongCount = 0;
         // 게임 진행
         while (true) {
             showWord(maskedWord);
+            System.out.println("틀린 횟수: " + wrongCount);
             String userGuess = Utils.getGuess();
             List<Integer> indexes = locateUserGuess(answerWord, userGuess);
+            if (indexes.isEmpty()) {
+                wrongCount = wrongCount + 1;
+            }
             maskedWord = replaceWithAlphabet(maskedWord, indexes, userGuess);
 
             if (!maskedWord.contains(MASK)) {
+                break;
+            }
+            if (wrongCount == MAX_WRONG_COUNT) {
                 break;
             }
         }
