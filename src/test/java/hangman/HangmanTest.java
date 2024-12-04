@@ -113,4 +113,30 @@ public class HangmanTest {
         // then
         assertThat(result).isTrue();
     }
+
+    @Test
+    void 틀린개수증가1() {
+        // given
+        int wrongCount = 1;
+        List<Integer> indexes = List.of();
+
+        // when
+        int newWrongCount = Application.incrementWrongCount(indexes, wrongCount);
+
+        // then
+        assertThat(newWrongCount).isEqualTo(wrongCount + 1);
+    }
+
+    @Test
+    void 틀린개수증가2() {
+        // given
+        int wrongCount = 1;
+        List<Integer> indexes = List.of(3);
+
+        // when
+        int newWrongCount = Application.incrementWrongCount(indexes, wrongCount);
+
+        // then
+        assertThat(newWrongCount).isEqualTo(wrongCount);
+    }
 }

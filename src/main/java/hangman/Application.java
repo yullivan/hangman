@@ -21,11 +21,16 @@ public class Application {
             System.out.println("틀린 횟수: " + wrongCount);
             String userGuess = Utils.getGuess();
             List<Integer> indexes = locateUserGuess(answerWord, userGuess);
-            if (indexes.isEmpty()) {
-                wrongCount = wrongCount + 1;
-            }
+            wrongCount = incrementWrongCount(indexes, wrongCount);
             maskedWord = replaceWithAlphabet(maskedWord, indexes, userGuess);
         }
+    }
+
+    static int incrementWrongCount(List<Integer> indexes, int wrongCount) {
+        if (indexes.isEmpty()) {
+            return wrongCount + 1;
+        }
+        return wrongCount;
     }
 
     static boolean isGameOver(int wrongCount, List<String> maskedWord) {
@@ -50,12 +55,12 @@ public class Application {
         ArrayList<Integer> result = new ArrayList<>();
         for (int i = 0; i < answerWord.length(); i++) {
             /*
-            * 예시
-            * answerWord: PROGRAMMING, userGuess: R
-            * [i: 0] P == R
-            * [i: 1] R == R
-            * [i: 2] O == R
-            * */
+             * 예시
+             * answerWord: PROGRAMMING, userGuess: R
+             * [i: 0] P == R
+             * [i: 1] R == R
+             * [i: 2] O == R
+             * */
             // if (answerWord.charAt(i) == userGuess.charAt(0)) {
             if (answerWord.substring(i, i + 1).equals(userGuess)) {
                 result.add(i);
