@@ -12,11 +12,16 @@ public class Application {
         List<String> maskedWord = generateMaskedWord(answerWord);
 
         // 게임 진행
-        showWord(maskedWord);
-        String userGuess = Utils.getGuess();
-        List<Integer> indexes = locateUserGuess(answerWord, userGuess);
-        maskedWord = replaceWithAlphabet(maskedWord, indexes, userGuess);
-        showWord(maskedWord);
+        while (true) {
+            showWord(maskedWord);
+            String userGuess = Utils.getGuess();
+            List<Integer> indexes = locateUserGuess(answerWord, userGuess);
+            maskedWord = replaceWithAlphabet(maskedWord, indexes, userGuess);
+
+            if (!maskedWord.contains("_")) {
+                break;
+            }
+        }
     }
 
     static List<String> generateMaskedWord(String answerWord) {
