@@ -19,4 +19,29 @@ public class HangmanTest {
         // then
         assertThat(maskedWord).isEqualTo(List.of("_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_"));
     }
+
+    @Test
+    void 알파벳위치찾기1() {
+        // given
+        String answerWord = "PROGRAMMING";
+        String userGuess = "R";
+
+        // when
+        List<Integer> indexes = Application.locateUserGuess(answerWord, userGuess);
+
+        // then
+        assertThat(indexes).isEqualTo(List.of(1, 4));
+    }
+    @Test
+    void 알파벳위치찾기2() {
+        // given
+        String answerWord = "PROGRAMMING";
+        String userGuess = "X";
+
+        // when
+        List<Integer> indexes = Application.locateUserGuess(answerWord, userGuess);
+
+        // then
+        assertThat(indexes).isEqualTo(List.of());
+    }
 }
