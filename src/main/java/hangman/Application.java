@@ -16,7 +16,7 @@ public class Application {
 
         int wrongCount = 0;
         // 게임 진행
-        while (true) {
+        while (!isGameOver(wrongCount, maskedWord)) {
             showWord(maskedWord);
             System.out.println("틀린 횟수: " + wrongCount);
             String userGuess = Utils.getGuess();
@@ -25,14 +25,17 @@ public class Application {
                 wrongCount = wrongCount + 1;
             }
             maskedWord = replaceWithAlphabet(maskedWord, indexes, userGuess);
-
-            if (!maskedWord.contains(MASK)) {
-                break;
-            }
-            if (wrongCount == MAX_WRONG_COUNT) {
-                break;
-            }
         }
+    }
+
+    static boolean isGameOver(int wrongCount, List<String> maskedWord) {
+        if (wrongCount == MAX_WRONG_COUNT) {
+            return true;
+        }
+        if (!maskedWord.contains(MASK)) {
+            return true;
+        }
+        return false;
     }
 
     static List<String> generateMaskedWord(String answerWord) {

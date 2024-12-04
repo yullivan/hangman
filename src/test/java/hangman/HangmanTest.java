@@ -74,4 +74,43 @@ public class HangmanTest {
         assertThat(newMaskedWord).isEqualTo(List.of("_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_"));
 
     }
+
+    @Test
+    void 게임오버판단1() {
+        // given
+        int wrongCount = 6;
+        List<String> maskedWord = List.of("_", "_", "_");
+
+        // when
+        boolean result = Application.isGameOver(wrongCount, maskedWord);
+
+        // then
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    void 게임오버판단2() {
+        // given
+        int wrongCount = 5;
+        List<String> maskedWord = List.of("_", "_", "_");
+
+        // when
+        boolean result = Application.isGameOver(wrongCount, maskedWord);
+
+        // then
+        assertThat(result).isFalse();
+    }
+
+    @Test
+    void 게임오버판단3() {
+        // given
+        int wrongCount = 5;
+        List<String> maskedWord = List.of("a", "b", "c");
+
+        // when
+        boolean result = Application.isGameOver(wrongCount, maskedWord);
+
+        // then
+        assertThat(result).isTrue();
+    }
 }
