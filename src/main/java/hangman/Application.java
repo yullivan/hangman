@@ -14,6 +14,7 @@ public class Application {
         // 게임 진행
         String userGuess = Utils.getGuess();
         List<Integer> indexes = locateUserGuess(answerWord, userGuess);
+        maskedWord = replaceWithAlphabet(maskedWord, indexes, userGuess);
     }
 
     static List<String> generateMaskedWord(String answerWord) {
@@ -38,6 +39,20 @@ public class Application {
             if (answerWord.substring(i, i + 1).equals(userGuess)) {
                 result.add(i);
             }
+        }
+
+        return result;
+    }
+
+    static List<String> replaceWithAlphabet(List<String> maskedWord, List<Integer> indexes, String userGuess) {
+        ArrayList<String> result = new ArrayList<>();
+        for (String alphabet : maskedWord) {
+            result.add(alphabet);
+        }
+
+        for (Integer index : indexes) {
+//            maskedWord.set(index, userGuess);
+            result.set(index, userGuess);
         }
 
         return result;
