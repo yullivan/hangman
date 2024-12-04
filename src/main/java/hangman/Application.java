@@ -12,9 +12,11 @@ public class Application {
         List<String> maskedWord = generateMaskedWord(answerWord);
 
         // 게임 진행
+        showWord(maskedWord);
         String userGuess = Utils.getGuess();
         List<Integer> indexes = locateUserGuess(answerWord, userGuess);
         maskedWord = replaceWithAlphabet(maskedWord, indexes, userGuess);
+        showWord(maskedWord);
     }
 
     static List<String> generateMaskedWord(String answerWord) {
@@ -56,5 +58,10 @@ public class Application {
         }
 
         return result;
+    }
+
+    static void showWord(List<String> maskedWord) {
+        String joinedWord = String.join("", maskedWord);
+        System.out.println(joinedWord);
     }
 }
